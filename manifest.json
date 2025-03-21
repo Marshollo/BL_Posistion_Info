@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Text Checker",
+  "version": "1.0",
+  "description": "Dodaje opis do adresów ulic zgodnie z plikiem CSV",
+  "permissions": ["storage", "scripting", "activeTab"],
+  "host_permissions": ["https://beta.console.hayden.ai/*"],
+  "content_scripts": [
+    {
+      "matches": ["https://beta.console.hayden.ai/*"],
+      "js": ["papaparse.min.js", "content.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["data.csv", "papaparse.min.js"],
+      "matches": ["https://beta.console.hayden.ai/*"]
+    }
+  ]
+}
