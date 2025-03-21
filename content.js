@@ -1,14 +1,12 @@
 let lastExtractedText = '';  
 let locationData = {};  
 
-// Funkcja ładująca i parsująca CSV
 async function loadCSV() {
   const response = await fetch(chrome.runtime.getURL('data.csv'));
   const text = await response.text();
 
-  // Parsowanie CSV za pomocą PapaParse
   Papa.parse(text, {
-    header: true,  // CSV ma nagłówki kolumn
+    header: true, 
     skipEmptyLines: true, 
     complete: function(results) {
       results.data.forEach(row => {
@@ -45,23 +43,20 @@ function checkText() {
             const positionText = locationData[extractedText];
             console.log(`Dopasowana pozycja: "${positionText}"`);
 
-            // Wyszukaj istniejący element
             const targetXPath = document.evaluate('//*[@id="root"]/div[2]/div[2]/div/div/div[2]/div[1]/div[1]/div[2]', document, null, XPathResult.FIRST_ORDERED_NODE_TYPE, null).singleNodeValue;
 
             if (targetXPath) {
-              // Sprawdzamy, czy już istnieje element span z tekstem
               let existingSpan = targetXPath.querySelector('span.position-text');
               
               if (!existingSpan) {
                 // Jeśli nie ma, tworzymy nowy element span
                 existingSpan = document.createElement('span');
-                existingSpan.classList.add('position-text');  // Dodajemy klasę, by rozróżnić ten element
-                existingSpan.style.marginLeft = '10px'; // Dodajemy odstęp od istniejącego tekstu
+                existingSpan.classList.add('position-text'); 
+                existingSpan.style.marginLeft = '10px'; 
                 existingSpan.style.fontWeight = 'bold';
                 targetXPath.appendChild(existingSpan);
               }
 
-              // Zaktualizuj tekst w istniejącym elemencie span
               existingSpan.textContent = positionText;
             }
           } else {
