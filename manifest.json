@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "Text Checker",
+  "name": "BL LA Metro",
   "version": "1.0",
-  "description": "Dodaje opis do adresów ulic zgodnie z plikiem CSV",
+  "description": "Checks street text and compares to csv file",
   "permissions": ["storage", "scripting", "activeTab"],
   "host_permissions": ["https://beta.console.hayden.ai/*"],
   "content_scripts": [
